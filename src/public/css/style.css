@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#capture{
+    width: 90%;
+    margin: auto;
+}
+
+.header{
+    height: 100px;
+}
+
+.header img{
+    width: 20%;
+    height: 100%;
+}
+
+.header h5{
+    text-align: center;
+}
+
+/* 
+    Bank Detail Section
+ */
+
+.bankDetail{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bankDetail div{
+    font-size: 1rem;
+}

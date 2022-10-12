@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+    <main id="capture">
+
+        <!-- 
+            Header
+         -->
+
+        <header class="header">
+            <div>
+                <img src="../images/logo.png" alt="">
+            </div>
+            <h5>TAX INVOICE</h5>
+            <hr>
+        </header>
+
+        <!-- Bank detail section -->
+
+        <section class="bankDetail">
+            <div>
+                <p>Invoice No:INV/2022-23/00886</p>
+                <p>Invoice Genereator Date : 29 Sep 2022</p>
+                <p>Invoive To:</p>
+                <p><B>Ayush Agarwal</B></p>
+                <p>New address <br>
+                test <br>
+                NA <br>
+                PUNE-343454 <br>
+                Maharastra
+                <p><b>GISTIN</b> 04AABCU9603R1ZV</p>
+                <p><b>state code</b>-27</p>
+            </div>
+            <div>
+                <p>Invoice Form:</p>
+                <p>Investment Advisor Service Bank</p>
+                <p><B>Kotak Investment Advisor Limited</B></p>
+            </div>
+        </section>
+
+        <!-- 
+            Subjects
+         -->
+         
+
+        <!-- 
+            Footer
+         -->
+        <footer></footer>
+        <button onclick="makePDF()">Generate PDF</button>
+    </main>
+
+    <!-- JavsScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="../js/index.js"></script>
+</body>
+</html>
