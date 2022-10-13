@@ -9,26 +9,27 @@
 </head>
 <body>
     <main id="capture">
-
         <!-- 
             Header
-         -->
-
+        -->
         <header class="header">
             <div>
                 <img src="../images/logo.png" alt="">
             </div>
-            <h5>TAX INVOICE</h5>
+            <h3>TAX INVOICE</h3>
             <hr>
         </header>
-
-        <!-- Bank detail section -->
-
+        <!-- 
+            End
+         -->
+        <!--
+             Bank detail section
+         -->
         <section class="bankDetail">
             <div>
-                <p>Invoice No:INV/2022-23/00886</p>
-                <p>Invoice Genereator Date : 29 Sep 2022</p>
-                <p>Invoive To:</p>
+                <p><b>Invoice No</b>:INV/2022-23/00886</p>
+                <p><b>Invoice Generation Date</b> : 29 Sep 2022</p>
+                <p>Invoice To:</p>
                 <p><B>Ayush Agarwal</B></p>
                 <p>New address <br>
                 test <br>
@@ -42,19 +43,117 @@
                 <p>Invoice Form:</p>
                 <p>Investment Advisor Service Bank</p>
                 <p><B>Kotak Investment Advisor Limited</B></p>
+                <p>Address: Buddha Tower, B1,<br>
+                     Gautam Budh Nagar,<br> Noida-201301, <br>
+                    Uttar Pradesh <br>
+                </p>
+                <p><b>GISTIN</b>:4AABCU9603R1ZV</p>
+                <p><b>State Code</b>-343</p>
             </div>
         </section>
+        <!-- 
+            End
+         -->
 
         <!-- 
             Subjects
          -->
-         
+         <p class="subject">
+            <b>Subject: <u> Tax invoice for investment Advisor Services</u> for IAS CODE:2323 </b>
+         </p>
+         <!--
+             End
+         -->
+
+         <!-- 
+            Article
+         -->
+
+         <article>
+            <h4 class="dearSirMadam">Dear Sir / Madam,</h4>
+            <p>
+                Thank you for being associated with investment advisory limited.In accordance with the
+                 investment advisory aggrement, please find below tax innvoice towards investment advisory
+                 fees for the period ended  31 oct 2020
+            </p>
+
+            <table class="moneyBreakdown">
+                <tr>
+                    <td class="textAlignCenter moneyBreakdownFirstColumn"><b>Particulars</b></td>
+                    <td class="moneyBreakdownMiddleColumnData"></td>
+                    <td class="moneyBreakdownLastColumData textAlignCenter"><b>Amount(INR)</b></td>
+                </tr>
+                <tr>
+                    <td><b> Investment Advisory services fees for</b></td>
+                    <td class="moneyBreakdownMiddleColumnData"><b>Taxable value of service</b>     </td>
+                    <td class="moneyBreakdownLastColumData textAlignRight" >74,825.00</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="moneyBreakdownMiddleColumnData"><b>CGST @ 9%</b></td>    
+                    <td class="moneyBreakdownLastColumData textAlignRight">6,735.00</td>
+                </tr>
+                <tr>
+                    <td><b>Perioud</b>:01 Oct 2020 to 31 oct 2020</td>
+                    <td class="moneyBreakdownMiddleColumnData"><b> SGST @ 9%</b> </td>
+                    <td class="moneyBreakdownLastColumData textAlignRight" >6,735.00</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="moneyBreakdownMiddleColumnData"><b> IGST @ 18%</b> </td>
+                    <td class="moneyBreakdownLastColumData textAlignRight" >0.00</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="moneyBreakdownMiddleColumnData"><b>Total invoice</b></td>
+                    <td class="moneyBreakdownLastColumData textAlignRight" >88,825.00</td>
+                </tr>
+            </table>
+
+            <p class ="amountInWords"><b>Ammount in words</b>: Eight Eight Thousand Two Hundred and Ninety Five only </p>
+            <br>
+
+            <p>Thank you, <br>
+                Warm Regards, <br>
+                For ,<b>Kotak Advisor Limited</b>
+            </p>
+
+         </article>
+         <!-- 
+            End 
+        -->
 
         <!-- 
             Footer
          -->
-        <footer></footer>
-        <button onclick="makePDF()">Generate PDF</button>
+        <footer>
+            <h4>Authorized Signature</h4>
+            <hr>
+            <section class="userBankDetils">
+                <div>
+                    <p><b>SAC Classification</b>:Lorem spum</p>
+                    <p><b>SAC Code:</b>:Lorem spum</p>
+                    <p><b>PAN NO.</b>:Lorem spum</p>
+                    <p><b>GISTIN</b>:Lorem spum</p>
+                </div>
+                <div>
+                    <p><b>Full Name of Benificery</b>:Kotak investment Advisor Limited</p>
+                    <p><b>Benificery AC/No</b>:Lorem spum</p>
+                    <p><b>Bank</b>:Kotak Mahindr Bank</p>
+                    <p><b>Branch</b>:Noida</p>
+                </div>
+            </section>
+            <p class="note"><u>Note:Kindly note that effective 1st April 2023 we shall be raising the
+                advisory invoice on a quaterely basis by 15th Jul,15th Jan and 15th Apr, 
+            </u></p>
+            <div class="kotakMahindraFooterimg">
+                <img src="../images/kotak.mahindra.thub.png" alt="">
+            </div>
+            <p class="courtAuth">SUBJECT TO MUMBAI JURIDICTION</p>
+            
+        </footer>
+        <button onclick="makePDF()" class="pdfGenereateButton" id="pdfButton">Generate PDF</button>
+
     </main>
 
     <!-- JavsScript -->
