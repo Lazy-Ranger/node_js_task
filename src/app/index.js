@@ -2,6 +2,7 @@ const express = require("express");
 const { APP_CONFIG } = require("../config");
 const { join } = require("path");
 const morgan = require("morgan");
+const { APP_ROUTER } = require("./router");
 
 class ExpressApp {
   constructor() {
@@ -15,6 +16,7 @@ class ExpressApp {
     this.app.set("view engine", "ejs");
     this.app.set("views", join(__dirname, "../views"));
     this.app.use(express.static(join(__dirname, "../public")));
+
     /**
      * Pre middlewares
      */
@@ -23,10 +25,11 @@ class ExpressApp {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
 
-    this.app.get("/", (req, res) => {
-      res.render("index");
-    });
+    // this.app.get("/", async (req, res) => {
+    //   res.render("index");
+    // });
 
+    this.app.use(APP_ROUTER);
     this.app.listen(APP_CONFIG.PORT, () => {
       console.log(`App is listining at ${APP_CONFIG.PORT}`);
     });
