@@ -1,41 +1,40 @@
-const { FONT_SIZE } = require("../../../constants");
 const { join } = require("path");
 
-function invoiceTeamplate() {
+function invoiceTeamplate(invoiceData) {
   return {
     compress: false,
+    pageMargins: [40, 25, 40, 25],
     content: [
       {
         image: join(__dirname, "../../../../public/images/logo.png"),
-        width: 150,
-        height: 40,
+        width: 180,
+        height: 45,
+        margin: [0, -15, 0, 0],
       },
       {
         text: "TAX INVOICE",
         style: "header",
-        fontSize: FONT_SIZE.TEN,
+        fontSize: 14,
+        alignment: "center",
+        bold: true,
       },
       {
         nodeName: "HR",
-        margin: [0, 2, 0, 10],
         canvas: [
           {
             type: "line",
-            x1: 3,
+            x1: 0,
             y1: 3,
-            x2: 514,
-            y2: 0,
-            lineWidth: 0.5,
+            x2: 595 - 2 * 40,
+            y2: 5,
+            lineWidth: 1,
             lineColor: "#ACACAC",
           },
         ],
+        margin: [0, -3, 0, 20],
       },
       {
-        text: " ",
-        style: [],
-      },
-      {
-        alignment: "justify-content-center",
+        alignment: "justify",
         columns: [
           {
             text: [
@@ -44,41 +43,42 @@ function invoiceTeamplate() {
                 bold: true,
               },
               {
-                text: " INV/2022-23/00886\n",
+                text: ` ${invoiceData.invoice_number}\n`,
               },
               {
                 text: "Invoice Generation Date",
                 bold: true,
               },
               {
-                text: " INV/2022-23/00886\n",
+                text: ` ${invoiceData.invoice_date}\n`,
               },
               {
                 text: "Invoice To : \n",
               },
               {
-                text: ` Ayush Agrawal\n`,
+                text: ` ${invoiceData.client_name}\n`,
                 bold: true,
               },
               {
-                text: "New Address \n test \n NA \n Pune-343454 \n Maharastra\n",
+                text: `${invoiceData.address_1} \n ${invoiceData.address_2} \n ${invoiceData.address_3} \n ${invoiceData.city}- ${invoiceData.pinecode} \n ${invoiceData.state}\n`,
               },
               {
                 text: "GISTIN - ",
                 bold: true,
               },
               {
-                text: "04AABCU96034R1ZU0\n",
+                text: `${invoiceData.gst_number}\n`,
               },
               {
                 text: "State Code - ",
                 bold: true,
               },
               {
-                text: "27",
+                text: `${invoiceData.state_no}`,
               },
             ],
-            fontSize: FONT_SIZE.TEN,
+            fontSize: 11,
+            lineHeight: 1.2,
           },
           {
             text: [
@@ -86,13 +86,13 @@ function invoiceTeamplate() {
               { text: "Investment Advisor Service Desk\n" },
               { text: "Kotak Investment advisor limited\n", bold: true },
               {
-                text: "Address: Buddha Tower, B1,\n Gautam Budh Nagar,\n Noida-201301 \n Uttar Pradesh\n",
+                text: "27-BKC, 7th Floor, G-Block,\n Plot No. C-27 Bandra Kurla Complex,\n Mumbai - 400051, Maharastra\n",
               },
               {
                 text: "GISTIN",
                 bold: true,
               },
-              { text: "04AABCU9603R1ZV\n" },
+              { text: " - 27AAACK5933H1ZI\n" },
               {
                 text: "State Code - ",
                 bold: true,
@@ -101,8 +101,9 @@ function invoiceTeamplate() {
                 text: "27",
               },
             ],
-            margin: [20, 10, 0, 18],
-            fontSize: FONT_SIZE.TEN,
+            margin: [80, 10, 0, 18],
+            fontSize: 12,
+            lineHeight: 1.2,
           },
         ],
       },
@@ -110,29 +111,37 @@ function invoiceTeamplate() {
         text: [
           { text: "Subject:", bold: true },
           {
-            text: "Tax invoice for investment Advisor service ",
+            text: " Tax Invoice for Investment Advisory Services",
             decoration: "underline",
           },
           {
-            text: "for",
+            text: " for",
           },
           {
             text: " IAS CODE",
             bold: true,
           },
           {
-            text: " -23232",
+            text: ` : ${invoiceData.kial_code}`,
           },
         ],
-        fontSize: FONT_SIZE.TEN,
+        fontSize: 11,
         margin: [0, 10, 0, 0],
       },
       {
         text: "Dear Sir / Madam, ",
         margin: [0, 10],
+        fontSize: 11,
       },
       {
-        text: " Thank you for being associated with investment advisory limited.In accordance with the investment advisory aggrement, please find below tax innvoice towards investment advisory fees for the period ended  31 oct 2020",
+        text: [
+          {
+            text: `Thank you for being associated with Investment Advisory Services Limited. In accordance with the Investment
+        Advisory Services agreement, please find below Tax invoice towards Investment Advisory fees for the period ended ${invoiceData.to}`,
+          },
+        ],
+        fontSize: 11,
+        lineHeight: 1.2,
       },
       {
         text: "\n\n",
@@ -147,32 +156,32 @@ function invoiceTeamplate() {
                 text: "Particulars",
                 bold: true,
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
               },
               "",
               {
                 text: "Amount (INR)",
                 bold: true,
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
               },
             ],
             [
               {
-                text: "Investment Advisory Services fee for",
+                text: "Investment Advisory Services Fees for",
                 bold: true,
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
                 rowSpan: 2,
                 border: [true, false, false, false],
               },
               {
                 text: "Taxable value of Services",
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
                 bold: true,
               },
               {
-                text: "7,825.00",
+                text: `${invoiceData.final_amount}`,
                 alignment: "right",
               },
             ],
@@ -181,20 +190,20 @@ function invoiceTeamplate() {
               {
                 text: "CGST @ 9%",
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
                 bold: true,
               },
               {
-                text: "6,735.00",
+                text: `${invoiceData.cgst}`,
                 alignment: "right",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
               },
             ],
             [
               {
                 text: [
-                  { text: "Periouds: ", bold: true, fontSize: FONT_SIZE.TEN },
-                  { text: "01 OCT 2020 31 OCT 2020", fontSize: FONT_SIZE.TEN },
+                  { text: "Period: ", bold: true, fontSize: 12 },
+                  { text: "01 OCT 2020 31 OCT 2020", fontSize: 12 },
                 ],
                 border: [true, false, false, false],
                 rowSpan: 3,
@@ -203,9 +212,13 @@ function invoiceTeamplate() {
                 text: "SGST @ 9%",
                 bold: true,
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
               },
-              { text: "6,735.00", alignment: "right", fontSize: FONT_SIZE.TEN },
+              {
+                text: `${invoiceData.sgst}`,
+                alignment: "right",
+                fontSize: 11,
+              },
             ],
             [
               { text: "", border: [true, false, false, true] },
@@ -213,21 +226,25 @@ function invoiceTeamplate() {
                 text: "IGST @ 18%",
                 bold: true,
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
               },
-              { text: "0.00", alignment: "right", fontSize: FONT_SIZE.TEN },
+              {
+                text: `${invoiceData.igst}`,
+                alignment: "right",
+                fontSize: 11,
+              },
             ],
             [
               { text: "" },
               {
                 text: "Total invoice value",
                 alignment: "center",
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 11,
                 bold: true,
               },
               {
-                text: "88,295.00",
-                fontSize: FONT_SIZE.TEN,
+                text: `${invoiceData.total_amount}`,
+                fontSize: 11,
                 alignment: "right",
               },
             ],
@@ -237,11 +254,11 @@ function invoiceTeamplate() {
                   {
                     text: "Amount in words:",
                     bold: true,
-                    fontSize: FONT_SIZE.TEN,
+                    fontSize: 10,
                   },
                   {
-                    text: " Eight Eight Thousand Two Hundred and Ninety Five Only",
-                    fontSize: FONT_SIZE.TEN,
+                    text: ` ${invoiceData.amount_in_words}`,
+                    fontSize: 11,
                   },
                 ],
                 colSpan: 3,
@@ -259,26 +276,26 @@ function invoiceTeamplate() {
           { text: "For ," },
           { text: " Kotak Investment Advisors Limited ", bold: true },
         ],
-        fontSize: 10,
-        padding: [3, 0, 0, 0],
-        margin: [0, 20, 0, 40],
+        fontSize: 11,
+        margin: [0, 20, 0, 55],
+        lineHeight: 1.2,
       },
       {
-        text: "Authorised signature",
-        fontSize: FONT_SIZE.TEN,
+        text: "Authorised Signatory",
+        fontSize: 11,
         bold: true,
       },
       {
         nodeName: "HR",
-        margin: [0, 2, 0, 10],
+        margin: [0, 0, 0, 14],
         canvas: [
           {
             type: "line",
-            x1: 3,
-            y1: 3,
+            x1: 0,
+            y1: 0,
             x2: 514,
             y2: 0,
-            lineWidth: 0.5,
+            lineWidth: 1.5,
             lineColor: "#ACACAC",
           },
         ],
@@ -291,92 +308,100 @@ function invoiceTeamplate() {
               {
                 text: "SAS Certification ",
                 bold: true,
-                fontSize: FONT_SIZE.TEN,
+                fontSize: 10,
               },
-              { text: ":lorem span \n", fontSize: FONT_SIZE.NINE },
               {
-                text: "SAS Code                  ",
-                bold: true,
-                fontSize: FONT_SIZE.NINE,
+                text: ": Financial Consultancy Services \n",
+                fontSize: 10,
               },
-              { text: ":Lorem span \n", fontSize: FONT_SIZE.NINE },
               {
-                text: "PAN No:                     ",
+                text: "SAS Code              ",
                 bold: true,
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
-              { text: ":Lorem span\n", fontSize: FONT_SIZE.NINE },
+              { text: ": 997156 \n", fontSize: 10 },
               {
-                text: "GISTIN                       ",
+                text: "PAN No:                ",
                 bold: true,
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
-              { text: ":Lorem span", fontSize: FONT_SIZE.NINE },
+              { text: ": AAACK5933H\n", fontSize: 10 },
+              {
+                text: "GISTIN                   ",
+                bold: true,
+                fontSize: 10,
+              },
+              { text: ": 27AAACK5933H1ZI ", fontSize: 10 },
             ],
+            lineHeight: 1.2,
           },
           {
             text: [
               {
                 text: "Full Name Of beneficiary   ",
                 bold: true,
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
               {
                 text: ": Kotak Investment Advisory Limited\n",
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
               {
-                text: "Benificery Ac No.                ",
-                fontSize: FONT_SIZE.NINE,
+                text: "Benificery Ac No.                 ",
+                fontSize: 10,
                 bold: true,
               },
-              { text: ": lorem span\n", fontSize: FONT_SIZE.NINE },
+              ": ",
               {
-                text: "ISFC Code                             ",
-                bold: true,
-                fontSize: FONT_SIZE.NINE,
+                text: "5046434901\n",
+                fontSize: 10,
+                decoration: "underline",
               },
               {
-                text: ": Lorem span\n",
-                fontSize: FONT_SIZE.NINE,
+                text: "ISFC Code                              ",
+                bold: true,
+                fontSize: 10,
               },
               {
-                text: "Bank                                      ",
+                text: ": KKBK0000958\n",
+                fontSize: 10,
+              },
+              {
+                text: "Bank                                       ",
                 bold: true,
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
               {
                 text: ": Kotak Mahindra Bank Limited\n",
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
               },
               {
                 text: "Branch                                   ",
-                fontSize: FONT_SIZE.NINE,
+                fontSize: 10,
                 bold: true,
               },
+              ": ",
               {
-                text: ":Noida 62",
-                fontSize: FONT_SIZE.NINE,
+                text: "Mittal Court, Nariman Point, Mum.",
+                fontSize: 10,
+                decoration: "underline",
               },
             ],
+            lineHeight: 1.2,
           },
         ],
       },
       {
-        text: "Note: Kindly note that effective 1st April 2023 we shall be raising the advisory invoice on a quater basic by 15th jul 15th oct 15th jan and 15th Apr",
-        fontSize: FONT_SIZE.SEVEN,
+        text: `Note: Kindly note that effective 1st April 2023, we shall be raising the advisory invoices on a quarterly basis by 15th_Jul, 15th_Oct, 15th_Jan and 15th_Apr.`,
+        fontSize: 8,
         margin: [0, 15, 0, 0],
         decoration: "underline",
-        color: "#838588",
       },
       {
-        image: join(
-          __dirname,
-          "../../../../public/images/kotak.mahindra.thub.png"
-        ),
-        width: 450,
+        image: join(__dirname, "../../../../public/images/footer.png"),
+        width: 400,
         height: 50,
-        margin: [0, 30, 0, 0],
+        margin: [0, 50, 0, 0],
       },
       {
         text: "SUBJECT TO MUMBAI JURIDICTION",
@@ -385,13 +410,6 @@ function invoiceTeamplate() {
         margin: [0, 10, 0, 0],
       },
     ],
-    styles: {
-      header: {
-        fontSize: 10,
-        bold: true,
-        alignment: "center",
-      },
-    },
   };
 }
 

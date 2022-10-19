@@ -5,20 +5,23 @@ const { createWriteStream } = require("fs");
 
 const fonts = {
   Roboto: {
-    bold: join(__dirname, "../../../../public/fonts/Roboto-Bold.ttf"),
-    normal: join(__dirname, "../../../../public/fonts/Roboto-Regular.ttf"),
+    bold: join(__dirname, "../../../../public/fonts/Calibri Bold.ttf"),
+    normal: join(__dirname, "../../../../public/fonts/Calibri Regular.ttf"),
   },
 };
 
 class GeneratePdfServices {
   constructor() {}
-  genreate() {
+  generate(requestedData) {
     return new Promise((resolve, reject) => {
       const PdfPrinter = new pdfmake(fonts);
-      let pdfdoc = PdfPrinter.createPdfKitDocument(DATA_DEFINATION(), {
-        fontLayoutCache: false,
-        bufferPages: false,
-      });
+      let pdfdoc = PdfPrinter.createPdfKitDocument(
+        DATA_DEFINATION(requestedData),
+        {
+          fontLayoutCache: false,
+          bufferPages: false,
+        }
+      );
       let fileName = Date.now();
       const path = join(__dirname, `../../../../../pdf/${fileName}.pdf`);
 

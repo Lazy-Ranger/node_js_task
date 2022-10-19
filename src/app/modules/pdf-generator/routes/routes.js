@@ -5,6 +5,6 @@ const {
 
 const PDF_ROUTES = Router();
 
-PDF_ROUTES.get("/", PDF_GENERATOR_CONTROLLER.generatePdf);
+PDF_ROUTES.post("/", PDF_GENERATOR_CONTROLLER.generatePdf);
 
 module.exports = { PDF_ROUTES };
