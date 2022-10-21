@@ -413,4 +413,4 @@ function invoiceTeamplate(invoiceData) {
   };
 }
 
-module.exports = { DATA_DEFINATION: invoiceTeamplate };
+module.exports = { DATA_DEFINATION_FEEMEDATE: invoiceTeamplate };

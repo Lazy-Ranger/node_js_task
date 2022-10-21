@@ -1,4 +1,11 @@
-const { DATA_DEFINATION } = require("../helper");
+const {
+  DATA_DEFINATION_FEEMEDATE,
+  DATA_DEFINATION_PAYEMENT,
+  DATA_DEFINATION_KMTSL_ANNUAL,
+  DATA_DEFINATION_KMTSL_DIFFERENCIAL,
+  DATA_DEFINATION_KMTSL_OPEN,
+  DATA_DEFINATION_KMTSL_SETUP,
+} = require("../helper");
 const pdfmake = require("pdfmake");
 const { join } = require("path");
 const { createWriteStream } = require("fs");
@@ -10,35 +17,55 @@ const fonts = {
   },
 };
 
+function generatePDF(dataDefinationfun, requestedBody) {
+  const PdfPrinter = new pdfmake(fonts);
+  let pdfdoc = PdfPrinter.createPdfKitDocument(
+    dataDefinationfun(requestedBody),
+    {
+      fontLayoutCache: false,
+      bufferPages: false,
+    }
+  );
+  let fileName = Date.now();
+  const path = join(__dirname, `../../../../../pdf/${fileName}.pdf`);
+
+  const fileStream = createWriteStream(path);
+
+  const pdfStream = pdfdoc.pipe(fileStream);
+
+  pdfStream.on("error", (err) => {
+    throw err;
+  });
+
+  pdfdoc.end();
+
+  return path;
+}
+
 class GeneratePdfServices {
   constructor() {}
-  generate(requestedData) {
-    return new Promise((resolve, reject) => {
-      const PdfPrinter = new pdfmake(fonts);
-      let pdfdoc = PdfPrinter.createPdfKitDocument(
-        DATA_DEFINATION(requestedData),
-        {
-          fontLayoutCache: false,
-          bufferPages: false,
-        }
-      );
-      let fileName = Date.now();
-      const path = join(__dirname, `../../../../../pdf/${fileName}.pdf`);
 
-      const fileStream = createWriteStream(path);
+  async generatePdfFeemedate(requestedData) {
+    return generatePDF(DATA_DEFINATION_FEEMEDATE, requestedData);
+  }
 
-      const pdfStream = pdfdoc.pipe(fileStream);
+  async generatePdfPayement(requestedData) {
+    return generatePDF(DATA_DEFINATION_PAYEMENT, requestedData);
+  }
 
-      pdfStream.on("close", () => {
-        resolve(path);
-      });
+  async generatePDFkmclAnnual(requestedData) {
+    return generatePDF(DATA_DEFINATION_KMTSL_ANNUAL, requestedData);
+  }
 
-      pdfStream.on("error", (err) => {
-        reject(err);
-      });
+  async generatePDFkmclDifferencial(requestedData) {
+    return generatePDF(DATA_DEFINATION_KMTSL_DIFFERENCIAL, requestedData);
+  }
 
-      pdfdoc.end();
-    });
+  async generatePDFkmclOpen(requestedData) {
+    return generatePDF(DATA_DEFINATION_KMTSL_OPEN, requestedData);
+  }
+  async generatePDFkmclSetup(requestedData) {
+    return generatePDF(DATA_DEFINATION_KMTSL_SETUP, requestedData);
   }
 }
 
