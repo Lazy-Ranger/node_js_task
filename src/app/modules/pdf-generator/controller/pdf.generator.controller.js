@@ -7,10 +7,7 @@ class PdfGeneratorController {
   generatePdf = async (req, res) => {
     try {
       const path = await this.generatePdfService.generatePdfFeemedate(req.body);
-      if(path){
-        res.send(path);
-      }
-      return
+      res.send(path)
     } catch (err) {
       res.send(err, "Something went wrong");
     }
