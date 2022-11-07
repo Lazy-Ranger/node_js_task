@@ -12,14 +12,14 @@ class PdfGeneratorController {
       res.send(err, "Something went wrong");
     }
   };
-  generatePdfPayement = async (req, res) => {
-    try {
-      const path = await this.generatePdfService.generatePdfPayement(req.body);
-      res.send(path);
-    } catch (err) {
-      res.send(err);
-    }
-  };
+  // generatePdfPayement = async (req, res) => {
+  //   try {
+  //     // const path = await this.generatePdfService.generatePdfPayement(req.body);
+  //     res.send(path);
+  //   } catch (err) {
+  //     res.send(err);
+  //   }
+  // };
 
   generatePdfKmtclAnnual = async (req, res) => {
     try {
